@@ -1,7 +1,5 @@
-
 import data from '../../data.json'
 import Fuse from 'fuse.js'
-
 
 const fuseOptions = {
 	// isCaseSensitive: false,

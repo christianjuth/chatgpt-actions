@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "fuse.js": "^7.0.0",
+    "nano-jsx": "^0.1.0",
     "nitropack": "latest"
   }
 }
