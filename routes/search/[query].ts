@@ -26,5 +26,5 @@ const fuse = new Fuse(data, fuseOptions);
 
 export default eventHandler((event) => {
   const { query } = event.context.params
-  return fuse.search(query).slice(0, 100).map(result => result.item)
+  return fuse.search(query).slice(0, 50).map(result => result.item)
 })

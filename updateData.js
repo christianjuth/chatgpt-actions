@@ -30,6 +30,17 @@ function getGroceries(offset, limit) {
               size: sales_size
               unitOfMeasurement: sales_uom_description
               retailPrice: retail_price
+              funTags: fun_tags
+              nutrition {
+                detailsContext: panel_title
+                servingSize: serving_size
+                caloriesPerServing: calories_per_serving
+                servingsPerContainer: servings_per_container
+                details {
+                  title: nutritional_item
+                  amount
+                }
+              }
             }
             totalCount: total_count
           }
@@ -99,9 +110,17 @@ async function main() {
   for (const item of items) {
     item.categoryHierarchy = item.categoryHierarchy.map(({ name }) => name)
     item.retailPrice = `$${item.retailPrice}`
-  }
 
-  console.log(total, items.length)
+    let i = 0
+    for (const panel of item.nutrition ?? []) {
+      const details = []
+      for (const detail of panel.details) {
+        details.push(`${detail.title}: ${detail.amount}`)
+      }
+      item.nutrition[i].details = details.join(', ')
+      i++
+    }
+  }
 
   writeJsonArrayToFile('data.json', items);
 }
